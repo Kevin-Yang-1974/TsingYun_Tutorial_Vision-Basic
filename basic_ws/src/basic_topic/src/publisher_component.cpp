@@ -8,7 +8,9 @@ namespace basic_topic
     PublisherComponent::PublisherComponent(const rclcpp::NodeOptions& options) :
         Node("publisher_node", options)
     {
-        // TODO
+        pub_=this->create_publisher<geometry_msgs::msg::Quaternion>("quaternion",10);
+        timer_=this->create_wall_timer(100ms,
+        std::bind(&PublisherComponent::timer_callback, this));
     }
 
     double PublisherComponent::normalize_angle(double angle)
@@ -35,7 +37,17 @@ namespace basic_topic
         q.z = cr * cp * sy - sr * sp * cy;
         return q;
     }
-
+    void PublisherComponent::timer_callback(){
+        roll=normalize_angle(roll);
+        pitch=normalize_angle(pitch);
+        yaw=normalize_angle(yaw);
+        auto msg=rpy_to_quaternion(roll,pitch,yaw);
+        pub_->publish(msg);
+        RCLCPP_INFO(this->get_logger(),"Publishing Quaternion: ["<<msg.x<<", "<<msg.y<<", "<<msg.z<<", "<<msg.w<<"]"<<std::endl);
+        roll+=0.05;
+        pitch+=0.03;
+        yaw+=0.02;
+    }
     // TODO
 
 }  // namespace basic_topic

@@ -21,6 +21,11 @@ namespace basic_topic
         static constexpr double kPi = 3.14159265358979323846;
         double normalize_angle(double angle);
         void quaternion_to_rpy(const geometry_msgs::msg::Quaternion& q, double& roll, double& pitch, double& yaw);
+        void topic_callback(const geometry_msgs::msg::Quaternion::SharedPtr msg);
+        rclcpp::Subscription<geometry_msgs::msg::Quaternion>::SharedPtr sub_;
+        double roll{0.0};
+        double pitch{0.0};
+        double yaw{0.0};
 
         // TODO
     };
