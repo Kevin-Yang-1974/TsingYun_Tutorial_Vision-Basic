@@ -48,7 +48,6 @@ namespace basic_topic
         pitch+=0.03;
         yaw+=0.02;
     }
-    // TODO
 
 }  // namespace basic_topic
 
