@@ -1,5 +1,14 @@
 FROM ros:humble-ros-base
 
-# TODO
+RUN apt-get update && apt-get install -y\
+    build-essential \
+    cmake \
+    git \
+    vim \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN rosdep update && \
+    rosdep install --from-paths basic_ws\src --ignore-src -r -y
 
 WORKDIR /workspaces/code

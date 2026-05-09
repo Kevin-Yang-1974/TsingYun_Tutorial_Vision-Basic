@@ -40,7 +40,7 @@ namespace basic_topic
         roll=normalize_angle(roll);
         pitch=normalize_angle(pitch);
         yaw=normalize_angle(yaw);
-        RCLCPP_INFO(this_get_logger(),"Received Quaternion: ["<<msg->x<<", "<<msg->y<<", "<<msg->z<<", "<<msg->w<<"] -> RPY: ["<<roll<<", "<<pitch<<", "<<yaw<<"]"<<std::endl)
+        RCLCPP_INFO(this->get_logger(),"Received Quaternion: [%.6f, %.6f, %.6f, %.6f] -> RPY: [%.6f, %.6f, %.6f]", msg->x, msg->y, msg->z, msg->w, roll, pitch, yaw);
     }
 
 }  // namespace basic_topic

@@ -43,7 +43,7 @@ namespace basic_topic
         yaw=normalize_angle(yaw);
         auto msg=rpy_to_quaternion(roll,pitch,yaw);
         pub_->publish(msg);
-        RCLCPP_INFO(this->get_logger(),"Publishing Quaternion: ["<<msg.x<<", "<<msg.y<<", "<<msg.z<<", "<<msg.w<<"]"<<std::endl);
+        RCLCPP_INFO(this->get_logger(),"RPY: [%.6f, %.6f, %.6f] -> Publishing Quaternion: [%.6f, %.6f, %.6f, %.6f]", roll, pitch, yaw, msg.x, msg.y, msg.z, msg.w);
         roll+=0.05;
         pitch+=0.03;
         yaw+=0.02;
