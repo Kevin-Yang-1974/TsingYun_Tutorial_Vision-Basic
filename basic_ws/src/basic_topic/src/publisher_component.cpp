@@ -9,7 +9,7 @@ namespace basic_topic
         Node("publisher_node", options)
     {
         pub_=this->create_publisher<geometry_msgs::msg::Quaternion>("quaternion",10);
-        timer_=this->create_wall_timer(100ms,
+        timer_=this->create_wall_timer(1000ms,
         std::bind(&PublisherComponent::timer_callback, this));
     }
 

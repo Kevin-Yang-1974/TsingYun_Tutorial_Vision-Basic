@@ -8,28 +8,25 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(rclcpp_components REQUIRED)
 #Build
 add_library(publisher_component SHARED src/publisher_component.cpp)
 add_library(subscriber_component SHARED src/subscriber_component.cpp)
-target_include_directories()(publisher_component PUBLIC
+target_include_directories(publisher_component PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 target_include_directories(subscriber_component PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 ament_target_dependencies(publisher_component
+  rclcpp_components
   rclcpp
-  std_msgs
-  geometry_msgs
-)
+  geometry_msgs)
 ament_target_dependencies(subscriber_component
+  rclcpp_components
   rclcpp
-  std_msgs
-  geometry_msgs
-)
+  geometry_msgs)
 rclcpp_components_register_node(publisher_component
   PLUGIN "basic_topic::PublisherComponent"
   EXECUTABLE publisher_component_node)
