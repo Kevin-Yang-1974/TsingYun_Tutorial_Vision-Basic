@@ -14,10 +14,10 @@ find_package(rclcpp_components REQUIRED)
 #Build
 add_library(publisher_component SHARED src/publisher_component.cpp)
 add_library(subscriber_component SHARED src/subscriber_component.cpp)
-target_include_dictories(publisher_component PUBLIC
+target_include_directories()(publisher_component PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-target_include_dictories(subscriber_component PUBLIC
+target_include_directories(subscriber_component PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 ament_target_dependencies(publisher_component
